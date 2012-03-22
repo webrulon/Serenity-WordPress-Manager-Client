@@ -17,10 +17,25 @@ class swpm_client_admin extends swpm_client_core
 
 	public function swpm_client_page()
 	{
+		if (!class_exists('swpm_client_admin_dashboard'))
+		{
+			include(SWPM_PLUGIN_DIR . 'includes/class.dashboard.php');
+		}
+
+		$swpm_dashboard = new swpm_client_admin_dashboard();
+
+		add_screen_option('swpm_layout_columns', array('max' => 4, 'default' => 2));
 ?>
 <div class="wrap">
-	<h2>Serenity WordPress Manager</h2>
-</div>
+<?php screen_icon(); ?>
+<h2>Serenity WP Manager Dashboard</h2>
+
+<div id="dashboard-widgets-wrap">
+	<?php $swpm_dashboard->dashboard(); ?>
+	<div class="clear"></div>
+</div><!-- dashboard-widgets-wrap -->
+
+</div><!-- wrap -->
 <?php
 	}
 
