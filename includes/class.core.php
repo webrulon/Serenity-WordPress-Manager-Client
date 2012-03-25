@@ -15,7 +15,7 @@ if (!class_exists('WP_HTTP_IXR_Client'))
 	include(ABSPATH . WPINC . '/class-wp-http-ixr-client.php');
 }
 
-class swpm_client_core
+class swpm_client_core extends swpm_client_helper
 {
 	public function __construct()
 	{

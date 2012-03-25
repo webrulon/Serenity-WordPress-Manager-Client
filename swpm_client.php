@@ -13,6 +13,7 @@ define('SWPM_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SWPM_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('IN_SWPM', true);
 
+include_once(SWPM_PLUGIN_DIR . 'includes/class.helper.php');
 include_once(SWPM_PLUGIN_DIR . 'includes/class.core.php');
 include_once(SWPM_PLUGIN_DIR . 'includes/class.admin.php');
 
