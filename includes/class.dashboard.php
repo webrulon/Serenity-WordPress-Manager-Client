@@ -5,6 +5,38 @@ if (!defined('IN_SWPM'))
 	die();
 }
 
+class swpm_client_dashboard_widgets
+{
+	public function __construct()
+	{
+		add_action('swpm_dashboard_setup', array(&$this, 'swpm_dashboard_setup'));
+	}
+
+	public function swpm_dashboard_setup()
+	{
+		wp_add_dashboard_widget('test-widget-1', 'Test Widget 1', array(&$this, 'swpm_test_widget_1'));
+		wp_add_dashboard_widget('test-widget-2', 'Test Widget 2', array(&$this, 'swpm_test_widget_2'));
+
+		global $wp_meta_boxes;
+
+		$test_widget_2 = $wp_meta_boxes['dashboard']['normal']['core']['test-widget-2'];
+		unset($wp_meta_boxes['dashboard']['normal']['core']['test-widget-2']);
+		$wp_meta_boxes['dashboard']['side']['core']['test-widget-2'] = $test_widget_2;
+	}
+
+	public function swpm_test_widget_1()
+	{
+		echo 'Test Widget 1';
+	}
+
+	public function swpm_test_widget_2()
+	{
+		echo 'Test Widget 2';
+	}
+}
+
+$swpm_client_dashboard_widgets = new swpm_client_dashboard_widgets();
+
 function swpm_dashboard_setup()
 {
 	global $wp_registered_widgets, $wp_registered_widget_controls, $wp_dashboard_control_callbacks;
@@ -62,7 +94,7 @@ function swpm_dashboard_setup()
 	do_action('do_meta_boxes', $screen->id, 'side', '');
 }
 
-add_action('swpm_dashboard_setup', '_swpm_dashboard_setup');
+/*add_action('swpm_dashboard_setup', '_swpm_dashboard_setup');
 function _swpm_dashboard_setup()
 {
 	wp_add_dashboard_widget('test-widget-1', 'Test Widget 1', 'swpm_test_widget_1');
@@ -83,6 +115,6 @@ function swpm_test_widget_1()
 function swpm_test_widget_2()
 {
 	echo 'Test Widget 2';
-}
+}*/
 
 /* EOF */
